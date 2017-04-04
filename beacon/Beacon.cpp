@@ -19,8 +19,8 @@ void Beacon::begin(void)
 {
   // バッファを初期化.
   memset(_advertisingDataFilter, 0, sizeof(AdvertisingDataFilter));
-  memset(_advertisingDataFilterMask, 0, sizeof(AdvertisingDataFilter));
-  memset(_scanData, NULL, sizeof(_scanData));
+  memset(_advertisingDataFilterMask, 0L, sizeof(AdvertisingDataFilter));
+  memset(_scanData, 0, sizeof(_scanData));
 
   // BTモジュールを初期化.
   btStart();
@@ -68,12 +68,12 @@ void Beacon::setScanFilter(const AdvertisingDataFilter filter, const Advertising
   if (filter) {
     memcpy(_advertisingDataFilter, filter, sizeof(AdvertisingDataFilter));
   } else {
-    memset(_advertisingDataFilter, NULL, sizeof(AdvertisingDataFilter));
+    memset(_advertisingDataFilter, 0, sizeof(AdvertisingDataFilter));
   }
   if (mask) {
     memcpy(_advertisingDataFilterMask, mask, sizeof(AdvertisingDataFilter));
   } else {
-    memset(_advertisingDataFilterMask, NULL, sizeof(AdvertisingDataFilter));
+    memset(_advertisingDataFilterMask, 0, sizeof(AdvertisingDataFilter));
   }
 }
 
@@ -81,7 +81,7 @@ void Beacon::startScan(uint32_t duration, uint16_t scanInterval, uint16_t scanWi
 {
   // スキャンパラメータを設定.
   esp_ble_scan_params_t ble_scan_params;
-  memset(&ble_scan_params, NULL, sizeof(esp_ble_scan_params_t));
+  memset(&ble_scan_params, 0, sizeof(esp_ble_scan_params_t));
   ble_scan_params.scan_type = BLE_SCAN_TYPE_PASSIVE;
   ble_scan_params.own_addr_type = BLE_ADDR_TYPE_PUBLIC;
   ble_scan_params.scan_filter_policy = BLE_SCAN_FILTER_ALLOW_ALL;
